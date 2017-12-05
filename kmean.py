@@ -3,14 +3,6 @@ from copy import deepcopy
 import numpy as np
 import cluster as cls
 
-d = [cls.Data('1', [1.0,1.0]),
-     cls.Data('2', [1.5,2.0]),
-     cls.Data('3', [3.0,4.0]),
-     cls.Data('4', [5.0,7.0]),
-     cls.Data('5', [3.5,5.0]),
-     cls.Data('6', [4.5,5.0]),
-     cls.Data('7', [3.5,4.5])]
-
 # Seleciona k centroides aleatorios baseados nos objetos
 def randomizeClusters(datasetLen, k):
     initialIndexes = list()
@@ -50,6 +42,3 @@ def kMean(dataset, k, maxIter):
         maxIter -= 1
         
     return previousClusterset
-
-# Main       
-kMean(d, 4, 1000).printId()

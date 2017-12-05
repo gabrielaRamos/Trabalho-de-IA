@@ -1,6 +1,7 @@
 import cluster as cls
 import kmean as km
 import singlelink as sl
+import averagelink as avg
 from sklearn.metrics.cluster import adjusted_rand_score as rs
 
 
@@ -21,12 +22,17 @@ def indice_rand(list1, name):
 name = input("Nome do arquivo: ");
 
 datalist = list()
-file = open(filename, "r")
+file = open(name, "r")
 next(file)
 
 for line in file:
 	name, x, y = line.split()
 	datalist.append(cls.Data(name,[x,y]))
 
+avgLink = avg.averageLink(datalist, 1, 9)
+      
+kMean = km.kMean(datalist, 4, 1000)
 
-indice_rand([0,0,0], "1.clu")
+sngLink = sl.singleLink(datalist, 1, 9)
+
+#indice_rand([0,0,0], "1.clu")

@@ -2,15 +2,15 @@ from copy import deepcopy
 import numpy as np
 import cluster as cls
 
-d = [cls.Data('Homer', [0.0, 250.0, 36.0]),
-     cls.Data('Marge', [10.0, 150.0, 34.0]),
-     cls.Data('Bart', [2.0, 90.0, 10.0]),
-     cls.Data('Lisa', [6.0, 78.0, 8.0]),
-     cls.Data('Maggie', [4.0, 20.0, 1.0]),
-     cls.Data('Abe', [1.0, 170.0, 70.0]),
-     cls.Data('Selma', [8.0, 160.0, 41.0]),
-     cls.Data('Otto', [10.0, 180.0, 38.0]),
-     cls.Data('Krusty', [6.0, 200.0, 45.0])]   
+# d = [cls.Data('Homer', [0.0, 250.0, 36.0]),
+#      cls.Data('Marge', [10.0, 150.0, 34.0]),
+#      cls.Data('Bart', [2.0, 90.0, 10.0]),
+#      cls.Data('Lisa', [6.0, 78.0, 8.0]),
+#      cls.Data('Maggie', [4.0, 20.0, 1.0]),
+#      cls.Data('Abe', [1.0, 170.0, 70.0]),
+#      cls.Data('Selma', [8.0, 160.0, 41.0]),
+#      cls.Data('Otto', [10.0, 180.0, 38.0]),
+#      cls.Data('Krusty', [6.0, 200.0, 45.0])]   
 
 distMatrix = list()
 distList = list()
@@ -87,7 +87,3 @@ def singleLink(dataset, kMin, kMax):
     return dendrogram
     
     
-clst = singleLink(d, 1, 9)
-for c in clst:
-    c.printId()
-    print()
