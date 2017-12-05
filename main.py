@@ -14,25 +14,28 @@ def indice_rand(list1, name):
 	for line in file:
 		name, ind = line.split()
 		datalist.append(ind)
-
+		
 	return rs(list1, datalist)
 
 
 
-name = input("Nome do arquivo: ");
+filename = input("Nome do arquivo: ");
+
+print("Valores de máximo e minimo:", end="")
+kMax, kMin = map(int, input().split())
 
 datalist = list()
-file = open(name, "r")
+file = open(filename, "r")
 next(file)
 
 for line in file:
 	name, x, y = line.split()
-	datalist.append(cls.Data(name,[x,y]))
+	datalist.append(cls.Data(name,[float(x), float(y)]))
 
-avgLink = avg.averageLink(datalist, 1, 9)
-      
-kMean = km.kMean(datalist, 4, 1000)
+avgLink = avg.averageLink(datalist, kMin, kMax)
+kMean = km.kMean(datalist, kMin, kMax)
+sngLink = sl.singleLink(datalist, kMin, kMax)
 
-sngLink = sl.singleLink(datalist, 1, 9)
-
-#indice_rand([0,0,0], "1.clu")
+name = filename.split('.')
+name = filename[0] + ".clu"
+indice_rand(kMean, name)
