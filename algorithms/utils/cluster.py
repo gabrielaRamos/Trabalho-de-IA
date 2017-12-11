@@ -45,7 +45,7 @@ class Cluster:
     
     # Compara dois clusters
     def __eq__(self, other):
-        return self.dataset == other.dataset
+        return False if other == None else self.dataset == other.dataset
         
     # Exibe o cluster com todos os dados
     def printAll(self):
@@ -69,7 +69,8 @@ class ClusterSet:
     def __init__(self, dataset):
         self.clusters = list()
         for d in dataset:
-            self.clusters.append(Cluster([d]))            
+            self.clusters.append(Cluster([d]))   
+        self.numClusters = len(self.clusters)
             
     # Clusteriza pelo centroid mais proximo
     # Parametros --> Dado
@@ -93,10 +94,23 @@ class ClusterSet:
             c.updateCentroid()
             
     # Combina dois clusters
-    def mergeClusters(self, c1, c2):
+    def mergeClusters(self, c1, c2, removeAfter):
         for data in self.clusters[c2].dataset:
             self.clusters[c1].add(data)
-        self.clusters.pop(c2)
+        if removeAfter:
+            self.clusters.pop(c2)
+        else:
+            self.clusters[c2] = None
+        self.numClusters -= 1
+        
+    # Retorna um clusterset sem clusters vazios
+    def cleaned(self):
+        cleanCluster = ClusterSet([])
+        for c in self.clusters:
+            if (c != None):
+                cleanCluster.clusters += [c]
+        cleanCluster.numClusters = len(cleanCluster.clusters)
+        return cleanCluster
     
     # Compara dois clusterset
     def __eq__(self, other):        
@@ -105,11 +119,7 @@ class ClusterSet:
     # Ordena um cluster
     def sortCluster(self):
         self.clusters.sort(key=lambda x: x.dataset[0].id)
-    
-    # Retorna numero de clusters
-    def numClusters(self):
-        return len(self.clusters)
-    
+        
     # Calcular a media de todos pra todos entre dois clusters
     def averageDistCluster(self, c1, c2):
         dist = 0.0        
@@ -132,3 +142,16 @@ class ClusterSet:
             c.printId()
             print()
         
+    # Escreve os clusters num arquivo
+    def writeToFile(self, filename):
+        with open(filename, 'w') as f:
+            for i, cluster in enumerate(self.clusters):
+                for data in cluster.dataset:
+                    f.write(data.id + ' ' + str(i) + '\n')
+                    
+    # Retorna os clusters em formato de lista
+    def listFormat(self):
+        l = list()
+        for i, cluster in enumerate(self.clusters):
+            l += [i] * len(cluster.dataset)        
+        return l

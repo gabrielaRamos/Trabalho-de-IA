@@ -1,7 +1,6 @@
 from random import randint
 from copy import deepcopy
-import numpy as np
-import cluster as cls
+from .utils import cluster as cl
 
 # Seleciona k centroides aleatorios baseados nos objetos
 def randomizeClusters(datasetLen, k):
@@ -21,8 +20,8 @@ def kMean(dataset, k, maxIter):
         initialClusters.append(dataset[i])
     
     # Inicializa clusterset  
-    clusterset = cls.ClusterSet(initialClusters)
-    previousClusterset = cls.ClusterSet([])
+    clusterset = cl.ClusterSet(initialClusters)
+    previousClusterset = cl.ClusterSet([])
     
     # Verifica o critério de parada
     while (maxIter > 0):
